@@ -1,5 +1,5 @@
 {
   "permissions": {
-    "allow": ["Bash(gh issue:*)", "Bash(winget install:*)"]
+    "allow": ["Bash(gh issue:*)", "Bash(winget install:*)", "Bash(npx biome:*)"]
   }
 }
