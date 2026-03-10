@@ -10,23 +10,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // ── 시맨틱 토큰 (shadcn/ui 호환) ──────────────────────────
         background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        accent2: "#7C3AED",
-        foreground: "hsl(var(--foreground))",
-        border: "hsl(var(--border))",
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        "muted-foreground": "var(--muted-foreground)",
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -39,10 +29,19 @@ const config: Config = {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
+        border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         chart: {
@@ -51,6 +50,45 @@ const config: Config = {
           "3": "hsl(var(--chart-3))",
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
+        },
+
+        // ── 디자인 팔레트 (숫자 스케일) ───────────────────────────
+        // 사용 예시: bg-blue-300, text-teal-500, border-green-200
+        blue: {
+          50: "#D9E1F5",
+          100: "#A4B9E8",
+          200: "#6A93DB",
+          300: "#496FAD",
+          400: "#314C79",
+          500: "#1A2C49",
+          600: "#081120",
+        },
+        teal: {
+          50: "#BBEEF8",
+          100: "#6ACBDB",
+          200: "#53A2AF",
+          300: "#3E7B85",
+          400: "#29565D",
+          500: "#163338",
+          600: "#051316",
+        },
+        green: {
+          50: "#C4FBE3",
+          100: "#6ADBB2",
+          200: "#54B18F",
+          300: "#3F886E",
+          400: "#2B614E",
+          500: "#193D30",
+          600: "#081D15",
+        },
+        gray: {
+          50: "#E2E6E6",
+          100: "#B9BEBF",
+          200: "#939798",
+          300: "#6F7373",
+          400: "#4E5050",
+          500: "#2E2F30",
+          600: "#111112",
         },
       },
       fontFamily: {
