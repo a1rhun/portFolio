@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import CustomCursor from "@/components/common/CustomCursor";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
+import LenisProvider from "@/components/providers/LenisProvider";
 import "./globals.css";
 
 const pretendard = localFont({
@@ -46,10 +47,12 @@ export default function RootLayout({
     <html lang="ko" suppressHydrationWarning>
       <body className={`${pretendard.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <CustomCursor />
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <LenisProvider>
+            <CustomCursor />
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </LenisProvider>
         </ThemeProvider>
       </body>
     </html>
