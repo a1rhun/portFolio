@@ -25,5 +25,5 @@ next-env.d.ts
 # OS
 .DS_Store
 
-# Claude Code (세션 로그/메모리는 로컬 전용)
-.claude/projects/
+# Claude Code (로컬 전용)
+.claude/
