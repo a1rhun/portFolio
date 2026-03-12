@@ -21,9 +21,9 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Fixed background glow — outside hero so overflow-hidden isn't needed */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/10 blur-[120px]" />
-        <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] rounded-full bg-accent2/8 blur-[100px]" />
+      <div className="fixed inset-0 pointer-events-none z-0" style={{ willChange: "transform" }}>
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/10 blur-[80px]" />
+        <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] rounded-full bg-accent2/8 blur-[60px]" />
       </div>
 
       {/* ── Hero ──────────────────────────────────────────── */}
@@ -113,10 +113,10 @@ export default function Home() {
               <Mail size={22} />
             </a>
           </motion.div>
-        </div>
 
-        {/* sentinel — GlobalNav(layout.tsx)이 이 위치를 추적해 nav를 자연스럽게 배치 */}
-        <div id="nav-sentinel" aria-hidden="true" className="h-16" />
+          {/* sentinel — GlobalNav(layout.tsx)이 이 위치를 추적해 nav를 자연스럽게 배치 */}
+          <div id="nav-sentinel" aria-hidden="true" className="mt-8" />
+        </div>
 
         {/* Scroll indicator */}
         <motion.div
