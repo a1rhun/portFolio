@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import { ThemeProvider } from "next-themes";
 import CustomCursor from "@/components/common/CustomCursor";
 import Footer from "@/components/layout/Footer";
-import Header from "@/components/layout/Header";
+import GlobalNav from "@/components/layout/GlobalNav";
 import LenisProvider from "@/components/providers/LenisProvider";
 import "./globals.css";
 
@@ -49,7 +49,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <LenisProvider>
             <CustomCursor />
-            <Header />
+            <GlobalNav />
             <main>{children}</main>
             <Footer />
           </LenisProvider>
