@@ -3,14 +3,13 @@
 ## 현재 브랜치
 `feat/2-common-ui-components`
 
-## 오늘 한 것 (2026-03-10)
-- 컬러 팔레트 CSS 변수 + Tailwind 토큰 추가 (blue/teal/green/gray)
-- Header 리팩토링: liquid glass 효과, Framer Motion active pill, 스크롤 기반 네비게이션
-- LenisProvider 구현 및 레이아웃 적용
-- Storybook 설정 추가
-- CLAUDE.md, Next.md, Claude 스킬(.claude/skills/) 세팅
+## 오늘 한 것 (2026-03-12)
+- Storybook 환경 수정: `@storybook/nextjs` → `@storybook/react-vite` 교체
+  - Next.js 14 내부 webpack 충돌 해결 (`Cannot read properties of undefined (reading 'tap')`)
+  - 모든 Storybook 패키지 v8.6.18 버전 통일
+- `GlobalNav.tsx` 컴포넌트 추가 (미커밋)
 
-> 커밋 전 상태. 집 가서 터미널에서 직접 커밋 후 push.
+> 이전 커밋(2026-03-10) 완료됨. 오늘 변경분 아직 미커밋.
 
 ---
 
@@ -18,25 +17,8 @@
 
 ### 1. 커밋 + push (바로)
 ```bash
-# 1) 설정/패키지
-git add .gitignore package.json package-lock.json
-git commit -m "chore: #2 패키지 추가 및 .gitignore 업데이트"
-
-# 2) 디자인 토큰
-git add app/globals.css tailwind.config.ts
-git commit -m "style: #2 컬러 팔레트 CSS 변수 및 Tailwind 토큰 추가"
-
-# 3) LenisProvider
-git add components/providers/ app/layout.tsx
-git commit -m "feat: #2 LenisProvider 구현 및 레이아웃 적용"
-
-# 4) Header
-git add components/layout/Header.tsx
-git commit -m "feat: #2 Header liquid glass 효과 및 스크롤 기반 네비게이션 구현"
-
-# 5) 문서/도구
-git add CLAUDE.md .storybook/ .claude/ Next.md
-git commit -m "chore: #2 CLAUDE.md, Storybook, Claude 스킬 설정 추가"
+git add .storybook/ package.json package-lock.json components/layout/GlobalNav.tsx Next.md
+git commit -m "chore: #2 Storybook react-vite로 교체 및 GlobalNav 추가"
 
 git push origin feat/2-common-ui-components
 ```
