@@ -9,14 +9,12 @@ const config: StorybookConfig = {
     options: {},
   },
   viteFinal: async (config) => {
-    config.resolve = {
-      ...config.resolve,
-      alias: {
-        ...((config.resolve?.alias as Record<string, string>) ?? {}),
-        "@": path.resolve(__dirname, ".."),
+    const { mergeConfig } = await import("vite");
+    return mergeConfig(config, {
+      resolve: {
+        alias: { "@": path.resolve(__dirname, "..") },
       },
-    };
-    return config;
+    });
   },
 };
 
