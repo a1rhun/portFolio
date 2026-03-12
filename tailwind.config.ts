@@ -37,6 +37,10 @@ const config: Config = {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        accent2: {
+          DEFAULT: "hsl(var(--accent2))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
@@ -163,7 +167,7 @@ const config: Config = {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-accent": "linear-gradient(135deg, #4361EE, #7C3AED)",
+        "gradient-accent": "linear-gradient(135deg, #0DCADC, #10B981)",
       },
       borderRadius: {
         lg: "var(--radius)",

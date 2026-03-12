@@ -12,29 +12,29 @@ const navLinks = [
   { id: "contact", label: "연락" },
 ];
 
-const logoDots = ["#007AFF", "#00C676", "#E2FF00"];
+const logoDots = ["#0DCADC", "#00C676", "#E2FF00"];
 
 const glassStyle: React.CSSProperties = {
-  background: "linear-gradient(135deg, rgba(67,97,238,0.38) 0%, rgba(99,102,241,0.28) 100%)",
+  background: "linear-gradient(135deg, rgba(13,202,220,0.38) 0%, rgba(16,185,129,0.28) 100%)",
   backdropFilter: "blur(32px) saturate(200%) brightness(1.08)",
   WebkitBackdropFilter: "blur(32px) saturate(200%) brightness(1.08)",
   border: "1px solid rgba(255,255,255,0.22)",
   boxShadow:
-    "0 8px 40px rgba(67,97,238,0.28), inset 0 1px 0 rgba(255,255,255,0.42), inset 0 -1px 0 rgba(67,97,238,0.18)",
+    "0 8px 40px rgba(13,202,220,0.28), inset 0 1px 0 rgba(255,255,255,0.42), inset 0 -1px 0 rgba(13,202,220,0.18)",
 };
 
 const mobileGlassStyle: React.CSSProperties = {
-  background: "linear-gradient(135deg, rgba(67,97,238,0.5) 0%, rgba(99,102,241,0.4) 100%)",
+  background: "linear-gradient(135deg, rgba(13,202,220,0.5) 0%, rgba(16,185,129,0.4) 100%)",
   backdropFilter: "blur(32px) saturate(200%) brightness(1.08)",
   WebkitBackdropFilter: "blur(32px) saturate(200%) brightness(1.08)",
   border: "1px solid rgba(255,255,255,0.2)",
-  boxShadow: "0 12px 40px rgba(67,97,238,0.3), inset 0 1px 0 rgba(255,255,255,0.3)",
+  boxShadow: "0 12px 40px rgba(13,202,220,0.3), inset 0 1px 0 rgba(255,255,255,0.3)",
 };
 
 const activePillStyle: React.CSSProperties = {
   background: "rgba(255,255,255,0.18)",
   border: "1px solid rgba(255,255,255,0.38)",
-  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 12px rgba(67,97,238,0.2)",
+  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 12px rgba(13,202,220,0.2)",
 };
 
 export default function Header() {
@@ -123,12 +123,13 @@ export default function Header() {
                 {activeSection === id && (
                   <motion.span
                     layoutId="activeNav"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0 }}
                     transition={{
                       layout: { type: "spring", stiffness: 340, damping: 28 },
                       opacity: { duration: 0.18 },
+                      x: { duration: 0.22, ease: "easeOut" },
                     }}
                     className="absolute inset-0 rounded-full"
                     style={activePillStyle}
