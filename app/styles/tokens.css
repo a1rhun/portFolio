@@ -1,56 +1,54 @@
-@layer base {
-  /* ── 시맨틱 토큰 ───────────────────────────────────────────── */
-  :root {
-    --background: #070C0D;
-    --foreground: #F0F4F4;
-    --card: #111718;
-    --card-foreground: #F0F4F4;
-    --popover: #111718;
-    --popover-foreground: #F0F4F4;
-    --primary: #0DCADC;
-    --primary-foreground: #FFFFFF;
-    --secondary: #1A2223;
-    --secondary-foreground: #F0F4F4;
-    --muted: #1A2223;
-    --muted-foreground: #8FA2A3;
-    --accent: #0DCADC;
-    --accent-foreground: #FFFFFF;
-    --destructive: #EF4343;
-    --destructive-foreground: #FAFAFA;
-    --border: #1E2829;
-    --input: #1E2829;
-    --ring: #0DCADC;
-    --accent2: #10B981;
-    --radius: 0.75rem;
-    --chart-1: #0DCADC;
-    --chart-2: #10B981;
-    --chart-3: #40768C;
-    --chart-4: #E8C468;
-    --chart-5: #F4A362;
-  }
+/* ── 시맨틱 토큰 ───────────────────────────────────────────── */
+:root {
+  --background: #070C0D;
+  --foreground: #F0F4F4;
+  --card: #111718;
+  --card-foreground: #F0F4F4;
+  --popover: #111718;
+  --popover-foreground: #F0F4F4;
+  --primary: #0DCADC;
+  --primary-foreground: #FFFFFF;
+  --secondary: #1A2223;
+  --secondary-foreground: #F0F4F4;
+  --muted: #1A2223;
+  --muted-foreground: #8FA2A3;
+  --accent: #0DCADC;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4343;
+  --destructive-foreground: #FAFAFA;
+  --border: #1E2829;
+  --input: #1E2829;
+  --ring: #0DCADC;
+  --accent2: #10B981;
+  --radius: 0.75rem;
+  --chart-1: #0DCADC;
+  --chart-2: #10B981;
+  --chart-3: #40768C;
+  --chart-4: #E8C468;
+  --chart-5: #F4A362;
+}
 
-  .dark {
-    --background: #070C0D;
-    --foreground: #F0F4F4;
-    --card: #111718;
-    --card-foreground: #F0F4F4;
-    --popover: #111718;
-    --popover-foreground: #F0F4F4;
-    --primary: #0DCADC;
-    --primary-foreground: #FFFFFF;
-    --secondary: #1A2223;
-    --secondary-foreground: #F0F4F4;
-    --muted: #1A2223;
-    --muted-foreground: #8FA2A3;
-    --accent: #0DCADC;
-    --accent-foreground: #FFFFFF;
-    --destructive: #7F1D1D;
-    --destructive-foreground: #FAFAFA;
-    --border: #1E2829;
-    --input: #1E2829;
-    --ring: #0DCADC;
-    --accent2: #10B981;
-  }
+.dark {
+  --background: #070C0D;
+  --foreground: #F0F4F4;
+  --card: #111718;
+  --card-foreground: #F0F4F4;
+  --popover: #111718;
+  --popover-foreground: #F0F4F4;
+  --primary: #0DCADC;
+  --primary-foreground: #FFFFFF;
+  --secondary: #1A2223;
+  --secondary-foreground: #F0F4F4;
+  --muted: #1A2223;
+  --muted-foreground: #8FA2A3;
+  --accent: #0DCADC;
+  --accent-foreground: #FFFFFF;
+  --destructive: #7F1D1D;
+  --destructive-foreground: #FAFAFA;
+  --border: #1E2829;
+  --input: #1E2829;
+  --ring: #0DCADC;
+  --accent2: #10B981;
 }
 
 /* ── 디자인 팔레트 ─────────────────────────────────────────── */

@@ -1,8 +1,126 @@
-@import "./styles/tokens.css";
-@import "./styles/typography.css";
-@import "./styles/base.css";
-@import "./styles/utilities.css";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "./styles/tokens.css";
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .typo-display {
+    font-size: var(--text-display);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-display);
+    letter-spacing: -0.02em;
+  }
+
+  .typo-h1 {
+    font-size: var(--text-h1);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-h1);
+    letter-spacing: -0.02em;
+  }
+
+  .typo-h2 {
+    font-size: var(--text-h2);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-h2);
+    letter-spacing: -0.01em;
+  }
+
+  .typo-h3 {
+    font-size: var(--text-h3);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-h3);
+    letter-spacing: -0.01em;
+  }
+
+  .typo-body-lg {
+    font-size: var(--text-body-lg);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-body-lg);
+  }
+
+  .typo-body {
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-body);
+  }
+
+  .typo-label {
+    font-size: var(--text-label);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-label);
+  }
+
+  .typo-caption {
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-caption);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #0DCADC, #10B981);
+  }
+
+  .glass {
+    background: #111118B3;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+  }
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0DCADC66;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0DCADCB3;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0DCADC66 transparent;
+}
+
+/* ── Selection ─────────────────────────────────────────────── */
+::selection {
+  background: #0DCADC4D;
+  color: #F0F4F4;
+}
