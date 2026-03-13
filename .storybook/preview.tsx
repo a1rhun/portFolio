@@ -1,10 +1,9 @@
 import type { Preview } from "@storybook/react";
+import React from "react";
 import "../app/globals.css";
 
 const preview: Preview = {
   parameters: {
-    // CSS 변수로 배경 관리하므로 addon-backgrounds 비활성화
-    backgrounds: { disable: true },
     controls: {
       matchers: {
         color: /(background|color)$/i,
