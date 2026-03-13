@@ -10,50 +10,50 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // ── 시맨틱 토큰 (shadcn/ui 호환) ──────────────────────────
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        // ── 시맨틱 토큰 ──────────────────────────────────────────
+        background: "#070C0D",
+        foreground: "#F0F4F4",
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "#111718",
+          foreground: "#F0F4F4",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "#111718",
+          foreground: "#F0F4F4",
         },
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "#0DCADC",
+          foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "#1A2223",
+          foreground: "#F0F4F4",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "#1A2223",
+          foreground: "#8FA2A3",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "#0DCADC",
+          foreground: "#FFFFFF",
         },
         accent2: {
-          DEFAULT: "hsl(var(--accent2))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "#10B981",
+          foreground: "#FFFFFF",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "#EF4343",
+          foreground: "#FAFAFA",
         },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
+        border: "#1E2829",
+        input: "#1E2829",
+        ring: "#0DCADC",
         chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
+          "1": "#0DCADC",
+          "2": "#10B981",
+          "3": "#40768C",
+          "4": "#E8C468",
+          "5": "#F4A362",
         },
 
         // ── 디자인 팔레트 (숫자 스케일) ───────────────────────────
