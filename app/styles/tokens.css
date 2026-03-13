@@ -1,0 +1,93 @@
+@layer base {
+  /* ── 시맨틱 토큰 ───────────────────────────────────────────── */
+  :root {
+    --background: #070C0D;
+    --foreground: #F0F4F4;
+    --card: #111718;
+    --card-foreground: #F0F4F4;
+    --popover: #111718;
+    --popover-foreground: #F0F4F4;
+    --primary: #0DCADC;
+    --primary-foreground: #FFFFFF;
+    --secondary: #1A2223;
+    --secondary-foreground: #F0F4F4;
+    --muted: #1A2223;
+    --muted-foreground: #8FA2A3;
+    --accent: #0DCADC;
+    --accent-foreground: #FFFFFF;
+    --destructive: #EF4343;
+    --destructive-foreground: #FAFAFA;
+    --border: #1E2829;
+    --input: #1E2829;
+    --ring: #0DCADC;
+    --accent2: #10B981;
+    --radius: 0.75rem;
+    --chart-1: #0DCADC;
+    --chart-2: #10B981;
+    --chart-3: #40768C;
+    --chart-4: #E8C468;
+    --chart-5: #F4A362;
+  }
+
+  .dark {
+    --background: #070C0D;
+    --foreground: #F0F4F4;
+    --card: #111718;
+    --card-foreground: #F0F4F4;
+    --popover: #111718;
+    --popover-foreground: #F0F4F4;
+    --primary: #0DCADC;
+    --primary-foreground: #FFFFFF;
+    --secondary: #1A2223;
+    --secondary-foreground: #F0F4F4;
+    --muted: #1A2223;
+    --muted-foreground: #8FA2A3;
+    --accent: #0DCADC;
+    --accent-foreground: #FFFFFF;
+    --destructive: #7F1D1D;
+    --destructive-foreground: #FAFAFA;
+    --border: #1E2829;
+    --input: #1E2829;
+    --ring: #0DCADC;
+    --accent2: #10B981;
+  }
+}
+
+/* ── 디자인 팔레트 ─────────────────────────────────────────── */
+:root {
+  /* Blue (Primary) */
+  --blue-50: #D9E1F5;
+  --blue-100: #A4B9E8;
+  --blue-200: #6A93DB;
+  --blue-300: #496FAD;
+  --blue-400: #314C79;
+  --blue-500: #1A2C49;
+  --blue-600: #081120;
+
+  /* Teal (Secondary) */
+  --teal-50: #BBEEF8;
+  --teal-100: #6ACBDB;
+  --teal-200: #53A2AF;
+  --teal-300: #3E7B85;
+  --teal-400: #29565D;
+  --teal-500: #163338;
+  --teal-600: #051316;
+
+  /* Green */
+  --green-50: #C4FBE3;
+  --green-100: #6ADBB2;
+  --green-200: #54B18F;
+  --green-300: #3F886E;
+  --green-400: #2B614E;
+  --green-500: #193D30;
+  --green-600: #081D15;
+
+  /* Gray */
+  --gray-50: #E2E6E6;
+  --gray-100: #B9BEBF;
+  --gray-200: #939798;
+  --gray-300: #6F7373;
+  --gray-400: #4E5050;
+  --gray-500: #2E2F30;
+  --gray-600: #111112;
+}
