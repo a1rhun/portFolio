@@ -13,7 +13,9 @@ const config: StorybookConfig = {
   },
   viteFinal: async (config) => {
     const { mergeConfig } = await import("vite");
+    const { default: react } = await import("@vitejs/plugin-react");
     return mergeConfig(config, {
+      plugins: [react({ jsxRuntime: "automatic" })],
       resolve: {
         alias: { "@": path.resolve(__dirname, "..") },
       },
