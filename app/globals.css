@@ -85,11 +85,11 @@
 
   .gradient-text {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, #0DCADC, #10B981);
+    background-image: linear-gradient(135deg, var(--primary), var(--accent2));
   }
 
   .glass {
-    background: #111118B3;
+    background: color-mix(in srgb, var(--card) 70%, transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
@@ -106,21 +106,21 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0DCADC66;
+  background: color-mix(in srgb, var(--primary) 40%, transparent);
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0DCADCB3;
+  background: color-mix(in srgb, var(--primary) 70%, transparent);
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #0DCADC66 transparent;
+  scrollbar-color: color-mix(in srgb, var(--primary) 40%, transparent) transparent;
 }
 
 /* ── Selection ─────────────────────────────────────────────── */
 ::selection {
-  background: #0DCADC4D;
-  color: #F0F4F4;
+  background: color-mix(in srgb, var(--primary) 30%, transparent);
+  color: var(--foreground);
 }
