@@ -24,3 +24,8 @@ next-env.d.ts
 
 # OS
 .DS_Store
+
+# Claude Code (로컬 전용)
+.claude/
+CLAUDE.md
+Next.md

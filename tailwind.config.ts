@@ -10,47 +10,89 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "hsl(var(--background))",
+        // ── 시맨틱 토큰 ──────────────────────────────────────────
+        background: "#070C0D",
+        foreground: "#F0F4F4",
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "#111718",
+          foreground: "#F0F4F4",
         },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        accent2: "#7C3AED",
-        foreground: "hsl(var(--foreground))",
-        border: "hsl(var(--border))",
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        "muted-foreground": "var(--muted-foreground)",
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "#111718",
+          foreground: "#F0F4F4",
         },
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "#0DCADC",
+          foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "#1A2223",
+          foreground: "#F0F4F4",
+        },
+        muted: {
+          DEFAULT: "#1A2223",
+          foreground: "#8FA2A3",
+        },
+        accent: {
+          DEFAULT: "#0DCADC",
+          foreground: "#FFFFFF",
+        },
+        accent2: {
+          DEFAULT: "#10B981",
+          foreground: "#FFFFFF",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "#EF4343",
+          foreground: "#FAFAFA",
         },
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
+        border: "#1E2829",
+        input: "#1E2829",
+        ring: "#0DCADC",
         chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
+          "1": "#0DCADC",
+          "2": "#10B981",
+          "3": "#40768C",
+          "4": "#E8C468",
+          "5": "#F4A362",
+        },
+
+        // ── 디자인 팔레트 (숫자 스케일) ───────────────────────────
+        // 사용 예시: bg-blue-300, text-teal-500, border-green-200
+        blue: {
+          50: "#D9E1F5",
+          100: "#A4B9E8",
+          200: "#6A93DB",
+          300: "#496FAD",
+          400: "#314C79",
+          500: "#1A2C49",
+          600: "#081120",
+        },
+        teal: {
+          50: "#BBEEF8",
+          100: "#6ACBDB",
+          200: "#53A2AF",
+          300: "#3E7B85",
+          400: "#29565D",
+          500: "#163338",
+          600: "#051316",
+        },
+        green: {
+          50: "#C4FBE3",
+          100: "#6ADBB2",
+          200: "#54B18F",
+          300: "#3F886E",
+          400: "#2B614E",
+          500: "#193D30",
+          600: "#081D15",
+        },
+        gray: {
+          50: "#E2E6E6",
+          100: "#B9BEBF",
+          200: "#939798",
+          300: "#6F7373",
+          400: "#4E5050",
+          500: "#2E2F30",
+          600: "#111112",
         },
       },
       fontFamily: {
@@ -125,7 +167,7 @@ const config: Config = {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-accent": "linear-gradient(135deg, #4361EE, #7C3AED)",
+        "gradient-accent": "linear-gradient(135deg, #0DCADC, #10B981)",
       },
       borderRadius: {
         lg: "var(--radius)",
