@@ -7,6 +7,7 @@ import { ArrowDown, Mail } from "lucide-react";
 import { useEffect, useRef } from "react";
 import AnimatedSection from "@/components/common/AnimatedSection";
 import ParticleBackground from "@/components/common/ParticleBackground";
+import SkillsSection from "@/components/common/SkillsSection";
 import TypewriterText from "@/components/common/TypewriterText";
 import WhatIDoCard from "@/components/common/WhatIDoCard";
 import { fadeUp } from "@/lib/animation";
@@ -20,8 +21,6 @@ function GithubIcon({ size = 22 }: { size?: number }) {
     </svg>
   );
 }
-
-const techStack = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "Figma"];
 
 const roles = ["Frontend Developer", "UI/UX Enthusiast", "Problem Solver", "Open Source Lover"];
 
@@ -281,32 +280,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Skills ────────────────────────────────────────── */}
-      <section id="skills" className="py-24 px-4 min-h-screen flex items-center relative z-10">
-        <div className="max-w-3xl mx-auto w-full">
-          <AnimatedSection className="text-center mb-12">
-            <p className="font-mono text-accent text-sm tracking-widest uppercase mb-2">
-              Tech Stack
-            </p>
-            <h2 className="text-3xl font-bold">사용 기술</h2>
-          </AnimatedSection>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            {techStack.map((tech, i) => (
-              <motion.span
-                key={tech}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: i * 0.05 }}
-                className="px-4 py-2 rounded-lg glass font-mono text-sm text-foreground hover:border-accent/40 hover:text-accent transition-all duration-200 cursor-default"
-              >
-                {tech}
-              </motion.span>
-            ))}
-          </div>
-        </div>
-      </section>
+      <SkillsSection />
 
       {/* ── Projects ──────────────────────────────────────── */}
       <section id="projects" className="py-24 px-4 min-h-screen flex items-center relative z-10">
