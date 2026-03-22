@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { serialize } from "next-mdx-remote/serialize";
 import MdxContent from "@/components/common/MdxContent";
-import { getAllProjects, getProjectBySlug, getProjectSlugs } from "@/lib/mdx";
+import { getProjectBySlug, getProjectSlugs } from "@/lib/mdx";
 
 interface Props {
   params: { slug: string };
@@ -24,8 +23,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProjectPage({ params }: Props) {
   const project = getProjectBySlug(params.slug);
   if (!project) notFound();
-
-  const mdxSource = await serialize(project.content);
 
   return (
     <div className="min-h-screen py-24 px-4">
@@ -71,7 +68,7 @@ export default async function ProjectPage({ params }: Props) {
 
         {/* MDX Content */}
         <div className="glass rounded-2xl p-8">
-          <MdxContent source={mdxSource} />
+          <MdxContent source={project.content} />
         </div>
       </div>
     </div>
