@@ -76,7 +76,7 @@ export default function SkillCard({
   const [hovered, setHovered] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
     mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
@@ -98,13 +98,15 @@ export default function SkillCard({
       transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
       style={{ perspective: "800px" }}
     >
-      <motion.div
+      <motion.button
+        type="button"
+        aria-expanded={open}
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         onMouseEnter={() => setHovered(true)}
         onClick={() => setOpen(true)}
-        className="relative glass rounded-xl p-5 flex flex-col gap-3 overflow-hidden cursor-pointer"
+        className="relative glass rounded-xl p-5 flex flex-col gap-3 overflow-hidden cursor-pointer text-left w-full"
       >
         {/* Glow follow */}
         <motion.div
@@ -186,7 +188,7 @@ export default function SkillCard({
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.div>
+      </motion.button>
     </motion.div>
   );
 }

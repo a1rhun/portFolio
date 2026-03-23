@@ -258,6 +258,7 @@ export default function SkillsSection() {
   const [activeTab, setActiveTab] = useState<TabKey>("Frontend");
   const [direction, setDirection] = useState(0);
   const handleTabChange = (tab: TabKey) => {
+    if (tab === activeTab) return;
     const currentIdx = tabs.indexOf(activeTab);
     const nextIdx = tabs.indexOf(tab);
     setDirection(nextIdx > currentIdx ? 1 : -1);

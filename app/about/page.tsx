@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Briefcase, GraduationCap, Layers, MapPin, Sparkles, User, Zap } from "lucide-react";
-import Image from "next/image";
 
 const infoItems = [
   { label: "이름", value: "공기훈", icon: User },

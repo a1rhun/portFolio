@@ -13,6 +13,27 @@ export function getProjectSlugs(): string[] {
     .map((f) => f.replace(/\.mdx$/, ""));
 }
 
+function validateFrontmatter(data: Record<string, unknown>): ProjectFrontmatter | null {
+  const { title, description, date } = data;
+  if (typeof title !== "string" || !title) return null;
+  if (typeof description !== "string") return null;
+  if (typeof date !== "string") return null;
+
+  return {
+    title,
+    slug: typeof data.slug === "string" ? data.slug : "",
+    description,
+    date,
+    tags: Array.isArray(data.tags)
+      ? data.tags.filter((t): t is string => typeof t === "string")
+      : [],
+    thumbnail: typeof data.thumbnail === "string" ? data.thumbnail : undefined,
+    github: typeof data.github === "string" ? data.github : undefined,
+    demo: typeof data.demo === "string" ? data.demo : undefined,
+    featured: typeof data.featured === "boolean" ? data.featured : undefined,
+  };
+}
+
 export function getProjectBySlug(slug: string): Project | null {
   const filePath = path.join(CONTENT_DIR, `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
@@ -20,11 +41,10 @@ export function getProjectBySlug(slug: string): Project | null {
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
 
-  return {
-    frontmatter: data as ProjectFrontmatter,
-    content,
-    slug,
-  };
+  const frontmatter = validateFrontmatter(data);
+  if (!frontmatter) return null;
+
+  return { frontmatter, content, slug };
 }
 
 export function getAllProjects(): Project[] {
