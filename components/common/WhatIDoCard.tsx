@@ -5,13 +5,7 @@ import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { fadeUp } from "@/lib/animation";
-
-export type WhatIDoItem = {
-  title: string;
-  description: string;
-  tags: string[];
-  image?: string;
-};
+import type { WhatIDoItem } from "@/types/whatIDo";
 
 export default function WhatIDoCard({
   title,
