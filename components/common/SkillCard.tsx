@@ -8,17 +8,9 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { Plus, X } from "lucide-react";
+import { ArrowUpRight, Plus, X } from "lucide-react";
 import { useRef, useState } from "react";
-
-export type Level = "주력" | "실무" | "학습";
-
-export type Skill = {
-  name: string;
-  description: string;
-  level: Level;
-  icon?: string; // cdn.simpleicons.org URL
-};
+import type { Level, Skill } from "@/types/skill";
 
 const levelStyles: Record<Level, string> = {
   주력: "bg-accent/10 text-accent border border-accent/25",
@@ -44,6 +36,33 @@ function SkillIcon({ icon, name }: { icon?: string; name: string }) {
   }
 
   return <span className="text-accent font-bold text-sm font-mono">{name[0]}</span>;
+}
+
+function ProjectRow({ title }: { title: string }) {
+  const [rowHovered, setRowHovered] = useState(false);
+
+  return (
+    <button
+      type="button"
+      onClick={(e) => e.stopPropagation()}
+      onMouseEnter={() => setRowHovered(true)}
+      onMouseLeave={() => setRowHovered(false)}
+      className="group flex items-center justify-between px-3 py-2 rounded-lg border border-transparent hover:border-accent/20 hover:bg-accent/5 transition-colors duration-200 w-full text-left"
+    >
+      <span
+        className={`text-xs font-medium transition-colors duration-200 ${rowHovered ? "text-accent" : "text-foreground/70"}`}
+      >
+        {title}
+      </span>
+      <motion.div
+        animate={{ x: rowHovered ? 3 : 0, y: rowHovered ? -3 : 0 }}
+        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        className={`transition-colors duration-200 ${rowHovered ? "text-accent" : "text-muted-foreground/40"}`}
+      >
+        <ArrowUpRight size={12} />
+      </motion.div>
+    </button>
+  );
 }
 
 export default function SkillCard({
@@ -106,7 +125,7 @@ export default function SkillCard({
         onMouseLeave={handleMouseLeave}
         onMouseEnter={() => setHovered(true)}
         onClick={() => setOpen(true)}
-        className="relative glass rounded-xl p-5 flex flex-col gap-3 overflow-hidden cursor-pointer text-left w-full"
+        className="relative glass rounded-xl p-5 flex flex-col gap-3 overflow-hidden cursor-pointer text-left w-full min-h-[172px]"
       >
         {/* Glow follow */}
         <motion.div
@@ -119,20 +138,14 @@ export default function SkillCard({
           }}
         />
 
-        {/* 호버 시 하단 우측 아이콘 */}
-        <AnimatePresence>
-          {hovered && !open && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.15 }}
-              className="absolute bottom-3 right-3 z-10 text-accent"
-            >
-              <Plus size={14} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* 상시 노출 + 아이콘, 호버 시 accent 색상 */}
+        {!open && (
+          <div
+            className={`absolute bottom-5 right-5 z-10 transition-colors duration-200 ${hovered ? "text-accent" : "text-muted-foreground/40"}`}
+          >
+            <Plus size={14} />
+          </div>
+        )}
 
         {/* 카드 앞면 */}
         <div className="relative flex items-center justify-between gap-3">
@@ -180,9 +193,10 @@ export default function SkillCard({
                   <X size={14} />
                 </button>
               </div>
-              <div className="flex flex-col gap-2">
-                <div className="h-7 rounded-lg bg-accent/5 border border-accent/10 animate-pulse" />
-                <div className="h-7 rounded-lg bg-accent/5 border border-accent/10 animate-pulse" />
+              <div className="flex flex-col gap-1.5">
+                {["프로젝트 A", "프로젝트 B"].map((title) => (
+                  <ProjectRow key={title} title={title} />
+                ))}
               </div>
               <p className="text-xs text-muted-foreground mt-auto">프로젝트 섹션 업데이트 예정</p>
             </motion.div>
