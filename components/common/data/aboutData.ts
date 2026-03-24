@@ -1,13 +1,14 @@
 import { Briefcase, GraduationCap, Layers, MapPin, Sparkles, User, Zap } from "lucide-react";
+import type { AboutWhatIDoItem, InfoItem } from "@/types/about";
 
-export const infoItems = [
+export const infoItems: InfoItem[] = [
   { label: "이름", value: "공기훈", icon: User },
   { label: "위치", value: "서울", icon: MapPin },
   { label: "학력", value: "OO대학교 컴퓨터공학과", icon: GraduationCap },
   { label: "상태", value: "구직 중", icon: Briefcase, highlight: true },
 ];
 
-export const whatIDo = [
+export const whatIDo: AboutWhatIDoItem[] = [
   {
     icon: Layers,
     title: "모던 프론트엔드",
