@@ -1,7 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowDown, Mail } from "lucide-react";
+import { useEffect, useRef } from "react";
+import AnimatedSection from "@/components/common/AnimatedSection";
+import ParticleBackground from "@/components/common/ParticleBackground";
+import SkillsSection from "@/components/common/SkillsSection";
+import TypewriterText from "@/components/common/TypewriterText";
+import WhatIDoCard from "@/components/common/WhatIDoCard";
+import { fadeUp } from "@/lib/animation";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function GithubIcon({ size = 22 }: { size?: number }) {
   return (
@@ -11,25 +22,72 @@ function GithubIcon({ size = 22 }: { size?: number }) {
   );
 }
 
-const techStack = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "Figma"];
+const roles = ["Frontend Developer", "UI/UX Enthusiast", "Problem Solver", "Open Source Lover"];
+
+const whatIDo = [
+  {
+    title: "모던 프론트엔드",
+    description:
+      "느린 페이지는 사용자를 잃습니다. Core Web Vitals와 SSR/SSG 전략으로 검색에 잘 잡히고 빠른 앱을 설계합니다.",
+    tags: ["React", "Vue.js", "Spring", "Next.js", "TypeScript", "Vite", "Webpack"],
+  },
+  {
+    title: "UI/UX & 애니메이션",
+    description:
+      "좋은 애니메이션은 보이지 않습니다. 사용자가 '자연스럽다'고 느끼는 순간이 잘 만든 인터랙션입니다.",
+    tags: ["Framer Motion", "GSAP", "Tailwind CSS", "Figma"],
+  },
+  {
+    title: "개발 경험 & 툴링",
+    description:
+      "혼자 잘 짜는 코드보다, 팀이 함께 잘 짜는 환경이 더 중요합니다. 문서화와 자동화로 개발자가 개발에 집중할 수 있게 만듭니다.",
+    tags: ["Storybook", "Biome", "Git", "Lefthook", "VitePress"],
+  },
+];
 
 function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 }
 
 export default function Home() {
+  const heroContentRef = useRef<HTMLDivElement>(null);
+  const heroSectionRef = useRef<HTMLElement>(null);
+
+  // 애니메이션 라이브러리 혼용 의도:
+  // - GSAP + ScrollTrigger: Hero 패럴랙스처럼 스크롤 진행률에 따라 값을 실시간으로 scrub해야 할 때 사용.
+  //   Framer Motion의 useScroll/useTransform으로도 가능하지만, GSAP scrub이 타임라인 제어에 더 직관적.
+  // - Framer Motion: 섹션 등장(whileInView), 마운트 애니메이션 등 상태 기반 트랜지션에 사용.
+  //   React 컴포넌트 트리와 자연스럽게 통합되고 variants 재사용이 용이함.
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (!heroContentRef.current || !heroSectionRef.current) return;
+
+      gsap.to(heroContentRef.current, {
+        y: -80,
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroSectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <div className="min-h-screen">
-      {/* Fixed background glow — outside hero so overflow-hidden isn't needed */}
-      <div className="fixed inset-0 pointer-events-none z-0" style={{ willChange: "transform" }}>
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/10 blur-[80px]" />
-        <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] rounded-full bg-accent2/8 blur-[60px]" />
-      </div>
+      <ParticleBackground />
 
       {/* ── Hero ──────────────────────────────────────────── */}
-      <section id="hero" className="relative flex flex-col min-h-screen px-4">
-        {/* Hero content */}
-        <div className="flex-1 flex flex-col items-center justify-center relative z-10 max-w-3xl mx-auto w-full text-center">
+      <section ref={heroSectionRef} id="hero" className="relative flex flex-col min-h-screen px-4">
+        <div
+          ref={heroContentRef}
+          className="flex-1 flex flex-col items-center justify-center relative z-10 max-w-3xl mx-auto w-full text-center"
+        >
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -52,9 +110,9 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-2xl sm:text-3xl font-semibold mb-6 gradient-text"
+            className="text-2xl sm:text-3xl font-semibold mb-6 min-h-[1.5em]"
           >
-            Frontend Developer
+            <TypewriterText texts={roles} className="gradient-text" />
           </motion.h2>
 
           <motion.p
@@ -114,7 +172,6 @@ export default function Home() {
             </a>
           </motion.div>
 
-          {/* sentinel — GlobalNav(layout.tsx)이 이 위치를 추적해 nav를 자연스럽게 배치 */}
           <div id="nav-sentinel" aria-hidden="true" className="mt-8" />
         </div>
 
@@ -135,52 +192,103 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ── Skills ────────────────────────────────────────── */}
-      <section id="skills" className="py-24 px-4 min-h-screen flex items-center relative z-10">
-        <div className="max-w-3xl mx-auto w-full">
+      {/* ── About ─────────────────────────────────────────── */}
+      <section id="about" className="py-24 px-4 relative z-10">
+        <div className="max-w-4xl mx-auto">
+          {/* Header */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            variants={fadeUp}
+            className="mb-16"
           >
-            <p className="font-mono text-accent text-sm tracking-widest uppercase mb-2">
-              Tech Stack
-            </p>
-            <h2 className="text-3xl font-bold">사용 기술</h2>
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">
+              사용자를 먼저 생각하는
+              <br />
+              <span className="gradient-text">프론트엔드 개발자</span>
+            </h2>
           </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-3">
-            {techStack.map((tech, i) => (
-              <motion.span
-                key={tech}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: i * 0.05 }}
-                className="px-4 py-2 rounded-lg glass font-mono text-sm text-foreground hover:border-accent/40 hover:text-accent transition-all duration-200 cursor-default"
-              >
-                {tech}
-              </motion.span>
-            ))}
+          {/* Profile + Bio */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="grid grid-cols-1 md:grid-cols-[260px_1fr] gap-12 mb-20 items-start"
+          >
+            {/* Profile image */}
+            <div className="flex flex-col items-center md:items-start">
+              <div className="relative">
+                {/* Glow */}
+                <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-accent/20 via-accent2/10 to-transparent blur-2xl pointer-events-none" />
+                {/* Photo card */}
+                <div className="relative w-[200px] h-[240px] md:w-[240px] md:h-[300px] rounded-2xl overflow-hidden ring-1 ring-accent/25 shadow-xl shadow-black/40">
+                  <img
+                    src="/profile.jpg"
+                    alt="공기훈 프로필 사진"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Bio */}
+            <div className="flex flex-col gap-5">
+              <div className="relative pl-5 border-l-2 border-accent/40">
+                <p className="text-foreground/75 text-base leading-[1.9] tracking-wide">
+                  안녕하세요,{" "}
+                  <span className="text-accent font-semibold">프론트엔드 개발자 공기훈</span>
+                  입니다. 사용자의 입장에서 생각하고, 더 나은 경험을 만들기 위해 고민합니다. React와
+                  Next.js를 중심으로 모던 웹 개발에 집중하고 있으며, 깔끔한 코드와 접근성을 중시하는
+                  개발을 지향합니다. 새로운 기술을 배우는 것을 즐기며, 꾸준한 성장을 목표로 합니다.
+                </p>
+              </div>
+
+              {/* 구직 중 칩 */}
+              <div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium text-emerald-400 bg-emerald-400/10 border border-emerald-400/25">
+                  <span className="relative flex h-1.5 w-1.5 shrink-0">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                  </span>
+                  구직 중
+                </span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* What I Do */}
+          <div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="mb-10"
+            >
+              <h3 className="text-3xl font-bold">이렇게 일합니다</h3>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
+              {whatIDo.map((item, i) => (
+                <WhatIDoCard key={item.title} {...item} index={i} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
+      <SkillsSection />
+
       {/* ── Projects ──────────────────────────────────────── */}
       <section id="projects" className="py-24 px-4 min-h-screen flex items-center relative z-10">
         <div className="max-w-3xl mx-auto w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
-          >
+          <AnimatedSection className="text-center mb-12">
             <p className="font-mono text-accent text-sm tracking-widest uppercase mb-2">Work</p>
             <h2 className="text-3xl font-bold">프로젝트</h2>
-          </motion.div>
+          </AnimatedSection>
           {/* TODO: 이슈 #5에서 구현 */}
           <div className="glass rounded-2xl p-12 text-center text-muted-foreground">🚧 준비 중</div>
         </div>
@@ -189,18 +297,12 @@ export default function Home() {
       {/* ── Activities ────────────────────────────────────── */}
       <section id="activities" className="py-24 px-4 min-h-screen flex items-center relative z-10">
         <div className="max-w-3xl mx-auto w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
-          >
+          <AnimatedSection className="text-center mb-12">
             <p className="font-mono text-accent text-sm tracking-widest uppercase mb-2">
               Experience
             </p>
             <h2 className="text-3xl font-bold">경력</h2>
-          </motion.div>
+          </AnimatedSection>
           {/* TODO: 이슈 #6에서 구현 */}
           <div className="glass rounded-2xl p-12 text-center text-muted-foreground">🚧 준비 중</div>
         </div>
@@ -208,13 +310,7 @@ export default function Home() {
 
       {/* ── Contact ───────────────────────────────────────── */}
       <section id="contact" className="py-24 px-4 min-h-screen flex items-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="max-w-2xl mx-auto w-full text-center glass rounded-2xl p-12"
-        >
+        <AnimatedSection className="max-w-2xl mx-auto w-full text-center glass rounded-2xl p-12">
           <h2 className="text-3xl font-bold mb-4">함께 일해요</h2>
           <p className="text-muted-foreground mb-8">새로운 프로젝트나 기회에 대해 이야기 나눠요.</p>
           <a
@@ -224,7 +320,7 @@ export default function Home() {
             <Mail size={18} />
             연락하기
           </a>
-        </motion.div>
+        </AnimatedSection>
       </section>
     </div>
   );
