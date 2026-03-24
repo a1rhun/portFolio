@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowDown, Mail } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 import AnimatedSection from "@/components/common/AnimatedSection";
 import { roles, whatIDo } from "@/components/common/data/homeData";
@@ -203,10 +204,12 @@ export default function Home() {
                 <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-accent/20 via-accent2/10 to-transparent blur-2xl pointer-events-none" />
                 {/* Photo card */}
                 <div className="relative w-[200px] h-[240px] md:w-[240px] md:h-[300px] rounded-2xl overflow-hidden ring-1 ring-accent/25 shadow-xl shadow-black/40">
-                  <img
+                  <Image
                     src="/profile.jpg"
                     alt="공기훈 프로필 사진"
-                    className="w-full h-full object-cover object-top"
+                    fill
+                    className="object-cover object-top"
+                    sizes="(min-width: 768px) 240px, 200px"
                   />
                 </div>
               </div>
