@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowDown, Mail } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import ActivitiesSection from "@/components/common/ActivitiesSection";
 import AnimatedSection from "@/components/common/AnimatedSection";
 import { roles, whatIDo } from "@/components/common/data/homeData";
 import GithubIcon from "@/components/common/GithubIcon";
@@ -261,18 +262,7 @@ export default function Home() {
       <ProjectsSection />
 
       {/* ── Activities ────────────────────────────────────── */}
-      <section id="activities" className="py-24 px-4 min-h-screen flex items-center relative z-10">
-        <div className="max-w-3xl mx-auto w-full">
-          <AnimatedSection className="text-center mb-12">
-            <p className="font-mono text-accent text-sm tracking-widest uppercase mb-2">
-              Experience
-            </p>
-            <h2 className="text-3xl font-bold">경력</h2>
-          </AnimatedSection>
-          {/* TODO: 이슈 #6에서 구현 */}
-          <div className="glass rounded-2xl p-12 text-center text-muted-foreground">🚧 준비 중</div>
-        </div>
-      </section>
+      <ActivitiesSection />
 
       {/* ── Contact ───────────────────────────────────────── */}
       <section id="contact" className="py-24 px-4 min-h-screen flex items-center relative z-10">
