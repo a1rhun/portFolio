@@ -10,8 +10,11 @@ export default function GlobalNav() {
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
 
-    const update = () => {
-      const sentinel = document.getElementById("nav-sentinel");
+    const sentinel = document.getElementById("nav-sentinel");
+    let ticking = false;
+
+    const apply = () => {
+      ticking = false;
       const y = sentinel ? Math.max(16, sentinel.getBoundingClientRect().top) : 16;
       wrapper.style.transform = `translateX(-50%) translateY(${y}px)`;
       if (wrapper.style.visibility !== "visible") {
@@ -19,9 +22,20 @@ export default function GlobalNav() {
       }
     };
 
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
+    // rAF 스로틀: scroll 이벤트마다 layout/paint 강제 발생을 막아 모바일 jank 감소
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(apply);
+    };
+
+    apply();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   return (
