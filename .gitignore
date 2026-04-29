@@ -25,7 +25,11 @@ next-env.d.ts
 # OS
 .DS_Store
 
-# Claude Code (로컬 전용)
+# build artifacts
+build.log
+
+# Claude Code / OMC (로컬 전용)
 .claude/
+.omc/
 CLAUDE.md
 Next.md
