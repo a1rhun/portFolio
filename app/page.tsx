@@ -34,10 +34,13 @@ export default function Home() {
 
   // 애니메이션 라이브러리 혼용 의도:
   // - GSAP + ScrollTrigger: Hero 패럴랙스처럼 스크롤 진행률에 따라 값을 실시간으로 scrub해야 할 때 사용.
-  //   Framer Motion의 useScroll/useTransform으로도 가능하지만, GSAP scrub이 타임라인 제어에 더 직관적.
   // - Framer Motion: 섹션 등장(whileInView), 마운트 애니메이션 등 상태 기반 트랜지션에 사용.
-  //   React 컴포넌트 트리와 자연스럽게 통합되고 variants 재사용이 용이함.
+  // 모바일/모션 감소 환경에서는 scrub 비활성: 매 스크롤 프레임 JS 계산이 jank의 주범.
   useEffect(() => {
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isTouch || reducedMotion) return;
+
     const ctx = gsap.context(() => {
       if (!heroContentRef.current || !heroSectionRef.current) return;
 

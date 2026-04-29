@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { useIsTouchDevice } from "@/lib/hooks/useIsTouchDevice";
 
 const navLinks = [
   { id: "about", label: "소개" },
@@ -15,22 +16,28 @@ const navLinks = [
 
 const logoDots = ["#0DCADC", "#00C676", "#E2FF00"];
 
-const glassStyle: React.CSSProperties = {
+// 모바일에서 backdrop-filter blur(32px) + saturate(200%)는 fixed 요소에 적용되어
+// 매 스크롤 프레임마다 재합성을 유발 → jank의 직접 원인. 모바일에서는 blur 14px로 축소하고
+// saturate/brightness 보정을 제거하여 GPU 부담을 크게 줄인다.
+const buildGlassStyle = (mobile: boolean): React.CSSProperties => ({
   background: "linear-gradient(135deg, rgba(13,202,220,0.38) 0%, rgba(16,185,129,0.28) 100%)",
-  backdropFilter: "blur(32px) saturate(200%) brightness(1.08)",
-  WebkitBackdropFilter: "blur(32px) saturate(200%) brightness(1.08)",
+  backdropFilter: mobile ? "blur(14px)" : "blur(32px) saturate(200%) brightness(1.08)",
+  WebkitBackdropFilter: mobile ? "blur(14px)" : "blur(32px) saturate(200%) brightness(1.08)",
   border: "1px solid rgba(255,255,255,0.22)",
-  boxShadow:
-    "0 8px 40px rgba(13,202,220,0.28), inset 0 1px 0 rgba(255,255,255,0.42), inset 0 -1px 0 rgba(13,202,220,0.18)",
-};
+  boxShadow: mobile
+    ? "0 4px 16px rgba(13,202,220,0.22), inset 0 1px 0 rgba(255,255,255,0.32)"
+    : "0 8px 40px rgba(13,202,220,0.28), inset 0 1px 0 rgba(255,255,255,0.42), inset 0 -1px 0 rgba(13,202,220,0.18)",
+});
 
-const mobileGlassStyle: React.CSSProperties = {
+const buildMobileGlassStyle = (mobile: boolean): React.CSSProperties => ({
   background: "linear-gradient(135deg, rgba(13,202,220,0.5) 0%, rgba(16,185,129,0.4) 100%)",
-  backdropFilter: "blur(32px) saturate(200%) brightness(1.08)",
-  WebkitBackdropFilter: "blur(32px) saturate(200%) brightness(1.08)",
+  backdropFilter: mobile ? "blur(14px)" : "blur(32px) saturate(200%) brightness(1.08)",
+  WebkitBackdropFilter: mobile ? "blur(14px)" : "blur(32px) saturate(200%) brightness(1.08)",
   border: "1px solid rgba(255,255,255,0.2)",
-  boxShadow: "0 12px 40px rgba(13,202,220,0.3), inset 0 1px 0 rgba(255,255,255,0.3)",
-};
+  boxShadow: mobile
+    ? "0 6px 20px rgba(13,202,220,0.24), inset 0 1px 0 rgba(255,255,255,0.24)"
+    : "0 12px 40px rgba(13,202,220,0.3), inset 0 1px 0 rgba(255,255,255,0.3)",
+});
 
 const activePillStyle: React.CSSProperties = {
   background: "rgba(255,255,255,0.18)",
@@ -43,6 +50,9 @@ export default function Header() {
   const [mounted, setMounted] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const isTouch = useIsTouchDevice();
+  const glassStyle = buildGlassStyle(isTouch);
+  const mobileGlassStyle = buildMobileGlassStyle(isTouch);
 
   useEffect(() => {
     setMounted(true);

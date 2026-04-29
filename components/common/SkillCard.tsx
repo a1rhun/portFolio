@@ -10,6 +10,7 @@ import {
 } from "framer-motion";
 import { ArrowUpRight, Plus, X } from "lucide-react";
 import { useRef, useState } from "react";
+import { useIsTouchDevice } from "@/lib/hooks/useIsTouchDevice";
 import type { Level, Skill } from "@/types/skill";
 
 const levelStyles: Record<Level, string> = {
@@ -74,6 +75,7 @@ export default function SkillCard({
 }: Skill & { index?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
+  const isTouch = useIsTouchDevice();
 
   // Tilt
   const mouseX = useMotionValue(0);
@@ -95,19 +97,25 @@ export default function SkillCard({
   const [hovered, setHovered] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
-    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
-    glowX.set(((e.clientX - rect.left) / rect.width) * 100);
-    glowY.set(((e.clientY - rect.top) / rect.height) * 100);
-  };
+  // 터치 디바이스에서는 mouseMove가 발생하지 않으므로 핸들러를 등록하지 않음
+  // (motionValue 자체는 spring 구독만 발생하나 transform 비용 줄임)
+  const handleMouseMove = isTouch
+    ? undefined
+    : (e: React.MouseEvent<HTMLButtonElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+        mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+        glowX.set(((e.clientX - rect.left) / rect.width) * 100);
+        glowY.set(((e.clientY - rect.top) / rect.height) * 100);
+      };
 
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-    setHovered(false);
-  };
+  const handleMouseLeave = isTouch
+    ? undefined
+    : () => {
+        mouseX.set(0);
+        mouseY.set(0);
+        setHovered(false);
+      };
 
   return (
     <motion.div
@@ -120,23 +128,25 @@ export default function SkillCard({
       <motion.button
         type="button"
         aria-expanded={open}
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        style={isTouch ? undefined : { rotateX, rotateY, transformStyle: "preserve-3d" }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        onMouseEnter={() => setHovered(true)}
+        onMouseEnter={isTouch ? undefined : () => setHovered(true)}
         onClick={() => setOpen(true)}
         className="relative glass rounded-xl p-5 flex flex-col gap-3 overflow-hidden cursor-pointer text-left w-full min-h-[172px]"
       >
-        {/* Glow follow */}
-        <motion.div
-          className={`absolute w-56 h-56 rounded-full blur-3xl pointer-events-none transition-opacity duration-300 ${hovered ? "opacity-100" : "opacity-0"}`}
-          style={{
-            left: glowLeft,
-            top: glowTop,
-            transform: "translate(-50%, -50%)",
-            backgroundColor: "color-mix(in srgb, var(--accent) 15%, transparent)",
-          }}
-        />
+        {/* Glow follow — 데스크톱 전용 (모바일은 blur-3xl 페인트 비용 회피) */}
+        {!isTouch && (
+          <motion.div
+            className={`absolute w-56 h-56 rounded-full blur-3xl pointer-events-none transition-opacity duration-300 ${hovered ? "opacity-100" : "opacity-0"}`}
+            style={{
+              left: glowLeft,
+              top: glowTop,
+              transform: "translate(-50%, -50%)",
+              backgroundColor: "color-mix(in srgb, var(--accent) 15%, transparent)",
+            }}
+          />
+        )}
 
         {/* 상시 노출 + 아이콘, 호버 시 accent 색상 */}
         {!open && (
