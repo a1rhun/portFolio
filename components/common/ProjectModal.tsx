@@ -6,14 +6,9 @@ import { useClipboard } from "@/hooks/useClipboard";
 import { useKeyDown } from "@/hooks/useKeyDown";
 import { useScrollLock } from "@/hooks/useScrollLock";
 import type { ProjectCardData, ProjectType } from "@/types/project";
+import { typeBadge } from "./data/projectsData";
 import GithubIcon from "./GithubIcon";
 import TagIcon from "./TagIcon";
-
-const typeBadge: Record<ProjectType, string> = {
-  개인: "bg-accent/10 text-accent border-accent/25",
-  팀: "bg-accent2/10 text-accent2 border-accent2/25",
-  수상작: "bg-chart-4/10 text-chart-4 border-chart-4/25",
-};
 
 const typeAccent: Record<ProjectType, string> = {
   개인: "from-sky-500/30 to-transparent",

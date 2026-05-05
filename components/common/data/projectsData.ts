@@ -1,6 +1,16 @@
-import type { ProjectCardData, ProjectCategory } from "@/types/project";
+import type { ProjectCardData, ProjectCategory, ProjectType } from "@/types/project";
 
-export type { ProjectCardData, ProjectCategory, ProjectType } from "@/types/project";
+export type {
+  ProjectCardData,
+  ProjectCategory,
+  ProjectType,
+} from "@/types/project";
+
+export const typeBadge: Record<ProjectType, string> = {
+  개인: "bg-accent/10 text-accent border-accent/25",
+  팀: "bg-accent2/10 text-accent2 border-accent2/25",
+  수상작: "bg-chart-4/10 text-chart-4 border-chart-4/25",
+};
 
 // simpleicons CDN: https://cdn.simpleicons.org/{slug} or {slug}/{color}
 // 아이콘이 없는 기술은 약어(initials)로 폴백됨

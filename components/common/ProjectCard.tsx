@@ -7,15 +7,10 @@ import { useClipboard } from "@/hooks/useClipboard";
 import { useMouseGlow } from "@/hooks/useMouseGlow";
 import { fadeUp } from "@/lib/animation";
 import type { ProjectCardData, ProjectType } from "@/types/project";
+import { typeBadge } from "./data/projectsData";
 import GithubIcon from "./GithubIcon";
 import ProjectModal from "./ProjectModal";
 import TagIcon from "./TagIcon";
-
-const typeBadge: Record<ProjectType, string> = {
-  개인: "bg-accent/10 text-accent border-accent/25",
-  팀: "bg-accent2/10 text-accent2 border-accent2/25",
-  수상작: "bg-chart-4/10 text-chart-4 border-chart-4/25",
-};
 
 const typeAccentBar: Record<ProjectType, string> = {
   개인: "from-sky-500/20 to-transparent",
@@ -97,7 +92,9 @@ export default function ProjectCard({ data, index }: { data: ProjectCardData; in
           onMouseLeave={handleMouseLeave}
           animate={
             hovered
-              ? { boxShadow: `0 0 0 1px ${border}, 0 6px 22px ${shadow}, 0 14px 34px ${shadow}` }
+              ? {
+                  boxShadow: `0 0 0 1px ${border}, 0 6px 22px ${shadow}, 0 14px 34px ${shadow}`,
+                }
               : { boxShadow: "0 0 0 1px transparent, 0 0px 0px transparent" }
           }
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
