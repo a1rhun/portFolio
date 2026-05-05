@@ -1,14 +1,24 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function CustomCursor() {
+  const [mounted, setMounted] = useState(false);
   const cursorDotRef = useRef<HTMLDivElement>(null);
   const cursorRingRef = useRef<HTMLDivElement>(null);
   const innerDotRef = useRef<HTMLDivElement>(null);
   const innerRingRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    setMounted(true);
+    document.documentElement.classList.add("custom-cursor");
+    return () => {
+      document.documentElement.classList.remove("custom-cursor");
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     // Only show custom cursor on non-touch devices
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
@@ -89,7 +99,9 @@ export default function CustomCursor() {
       document.removeEventListener("mouseenter", onMouseEnter);
       cancelAnimationFrame(animationId);
     };
-  }, []);
+  }, [mounted]);
+
+  if (!mounted) return null;
 
   return (
     <>
