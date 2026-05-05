@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function CustomCursor() {
+  const [mounted, setMounted] = useState(false);
   const cursorDotRef = useRef<HTMLDivElement>(null);
   const cursorRingRef = useRef<HTMLDivElement>(null);
   const innerDotRef = useRef<HTMLDivElement>(null);
@@ -11,6 +12,16 @@ export default function CustomCursor() {
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    document.documentElement.classList.add("custom-cursor");
+    return () => {
+      document.documentElement.classList.remove("custom-cursor");
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    // Only show custom cursor on non-touch devices
     if (window.matchMedia("(pointer: coarse)").matches) return;
     setEnabled(true);
   }, []);
@@ -95,9 +106,9 @@ export default function CustomCursor() {
       document.removeEventListener("mouseenter", onMouseEnter);
       cancelAnimationFrame(animationId);
     };
-  }, [enabled]);
+  }, [mounted]);
 
-  if (!enabled) return null;
+  if (!mounted) return null;
 
   return (
     <>
