@@ -8,6 +8,8 @@ export default function CustomCursor() {
   const cursorRingRef = useRef<HTMLDivElement>(null);
   const innerDotRef = useRef<HTMLDivElement>(null);
   const innerRingRef = useRef<HTMLDivElement>(null);
+  // 터치 디바이스에서는 DOM 자체를 만들지 않음 (불필요한 노드/스타일 평가 비용 제거)
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -21,6 +23,11 @@ export default function CustomCursor() {
     if (!mounted) return;
     // Only show custom cursor on non-touch devices
     if (window.matchMedia("(pointer: coarse)").matches) return;
+    setEnabled(true);
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
 
     const dot = cursorDotRef.current;
     const ring = cursorRingRef.current;
