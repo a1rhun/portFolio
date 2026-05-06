@@ -1,206 +1,43 @@
-"use client";
-
-import { motion } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowDown, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
 import ActivitiesSection from "@/components/common/ActivitiesSection";
 import AnimatedSection from "@/components/common/AnimatedSection";
-import { roles, whatIDo } from "@/components/common/data/homeData";
-import GithubIcon from "@/components/common/GithubIcon";
+import { whatIDo } from "@/components/common/data/homeData";
+import HeroSection from "@/components/common/HeroSection";
 import ParticleBackground from "@/components/common/ParticleBackground";
 import ProjectsSection from "@/components/common/ProjectsSection";
 import SkillsSection from "@/components/common/SkillsSection";
-import TypewriterText from "@/components/common/TypewriterText";
 import WhatIDoCard from "@/components/common/WhatIDoCard";
-import { fadeUp } from "@/lib/animation";
+import { getProjects } from "@/lib/notion";
 
-gsap.registerPlugin(ScrollTrigger);
+export const revalidate = 3600;
 
-function scrollTo(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-}
-
-export default function Home() {
-  const heroContentRef = useRef<HTMLDivElement>(null);
-  const heroSectionRef = useRef<HTMLElement>(null);
-
-  // 애니메이션 라이브러리 혼용 의도:
-  // - GSAP + ScrollTrigger: Hero 패럴랙스처럼 스크롤 진행률에 따라 값을 실시간으로 scrub해야 할 때 사용.
-  // - Framer Motion: 섹션 등장(whileInView), 마운트 애니메이션 등 상태 기반 트랜지션에 사용.
-  // 모바일/모션 감소 환경에서는 scrub 비활성: 매 스크롤 프레임 JS 계산이 jank의 주범.
-  useEffect(() => {
-    const isTouch = window.matchMedia("(pointer: coarse)").matches;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (isTouch || reducedMotion) return;
-
-    const ctx = gsap.context(() => {
-      if (!heroContentRef.current || !heroSectionRef.current) return;
-
-      gsap.to(heroContentRef.current, {
-        y: -80,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroSectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    });
-
-    return () => ctx.revert();
-  }, []);
+export default async function Home() {
+  const projects = await getProjects();
 
   return (
     <div className="min-h-screen">
       <ParticleBackground />
-
-      {/* ── Hero ──────────────────────────────────────────── */}
-      <section ref={heroSectionRef} id="hero" className="relative flex flex-col min-h-screen px-4">
-        <div
-          ref={heroContentRef}
-          className="flex-1 flex flex-col items-center justify-center relative z-10 max-w-3xl mx-auto w-full text-center"
-        >
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="font-mono text-accent text-sm mb-4 tracking-widest uppercase"
-          >
-            안녕하세요, 저는
-          </motion.p>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl sm:text-7xl font-bold mb-4 tracking-tight"
-          >
-            공기훈
-          </motion.h1>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-2xl sm:text-3xl font-semibold mb-6 min-h-[1.5em]"
-          >
-            <TypewriterText texts={roles} className="gradient-text" />
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-muted-foreground text-lg leading-relaxed mb-10 max-w-xl mx-auto"
-          >
-            사용자 경험을 중심으로 생각하는 프론트엔드 개발자입니다.
-            <br />
-            깔끔한 코드와 아름다운 인터페이스를 만드는 것을 좋아합니다.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex items-center justify-center gap-4 flex-wrap"
-          >
-            <button
-              type="button"
-              onClick={() => scrollTo("projects")}
-              className="px-6 py-3 rounded-lg bg-accent text-white font-medium hover:bg-accent/90 transition-all duration-200 hover:shadow-lg hover:shadow-accent/25"
-            >
-              프로젝트 보기
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollTo("contact")}
-              className="px-6 py-3 rounded-lg border border-border text-foreground font-medium hover:border-accent/50 hover:bg-accent/5 transition-all duration-200"
-            >
-              연락하기
-            </button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex items-center justify-center gap-4 mt-8"
-          >
-            <a
-              href="https://github.com/a1rhun"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-muted-foreground hover:text-accent transition-colors"
-              aria-label="GitHub"
-            >
-              <GithubIcon size={22} />
-            </a>
-            <a
-              href="mailto:hello@example.com"
-              className="p-2 text-muted-foreground hover:text-accent transition-colors"
-              aria-label="Email"
-            >
-              <Mail size={22} />
-            </a>
-          </motion.div>
-
-          <div id="nav-sentinel" aria-hidden="true" className="mt-8" />
-        </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.5 }}
-          className="flex flex-col items-center gap-2 text-muted-foreground pb-10 relative z-10"
-        >
-          <span className="text-xs font-mono tracking-widest uppercase">Scroll</span>
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-          >
-            <ArrowDown size={16} />
-          </motion.div>
-        </motion.div>
-      </section>
+      <HeroSection />
 
       {/* ── About ─────────────────────────────────────────── */}
       <section id="about" className="py-24 px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="mb-16"
-          >
+          <AnimatedSection className="mb-16">
             <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">
               사용자를 먼저 생각하는
               <br />
               <span className="gradient-text">프론트엔드 개발자</span>
             </h2>
-          </motion.div>
+          </AnimatedSection>
 
           {/* Profile + Bio */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="grid grid-cols-1 md:grid-cols-[260px_1fr] gap-12 mb-20 items-start"
-          >
+          <AnimatedSection className="grid grid-cols-1 md:grid-cols-[260px_1fr] gap-12 mb-20 items-start">
             {/* Profile image */}
             <div className="flex flex-col items-center md:items-start">
               <div className="relative">
-                {/* Glow */}
                 <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-accent/20 via-accent2/10 to-transparent blur-2xl pointer-events-none" />
-                {/* Photo card */}
                 <div className="relative w-[200px] h-[240px] md:w-[240px] md:h-[300px] rounded-2xl overflow-hidden ring-1 ring-accent/25 shadow-xl shadow-black/40">
                   <Image
                     src="/profile.jpg"
@@ -236,19 +73,13 @@ export default function Home() {
                 </span>
               </div>
             </div>
-          </motion.div>
+          </AnimatedSection>
 
           {/* What I Do */}
           <div>
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              className="mb-10"
-            >
+            <AnimatedSection className="mb-10">
               <h3 className="text-3xl font-bold">이렇게 일합니다</h3>
-            </motion.div>
+            </AnimatedSection>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
               {whatIDo.map((item, i) => (
@@ -262,7 +93,7 @@ export default function Home() {
       <SkillsSection />
 
       {/* ── Projects ──────────────────────────────────────── */}
-      <ProjectsSection />
+      <ProjectsSection initialProjects={projects} />
 
       {/* ── Activities ────────────────────────────────────── */}
       <ActivitiesSection />

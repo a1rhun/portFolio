@@ -3,8 +3,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import AnimatedSection from "./AnimatedSection";
-import type { ProjectCategory } from "./data/projectsData";
-import { categories, projects } from "./data/projectsData";
+import type { ProjectCardData, ProjectCategory } from "./data/projectsData";
+import { categories, projects as staticProjects } from "./data/projectsData";
 import ProjectCard from "./ProjectCard";
 
 const slideVariants = {
@@ -47,7 +47,12 @@ const categoryStyle: Record<string, { active: string; inactive: string }> = {
   },
 };
 
-export default function ProjectsSection() {
+interface Props {
+  initialProjects?: ProjectCardData[];
+}
+
+export default function ProjectsSection({ initialProjects }: Props) {
+  const projects = initialProjects ?? staticProjects;
   const [active, setActive] = useState<ProjectCategory>("전체");
   const [direction, setDirection] = useState(0);
 
