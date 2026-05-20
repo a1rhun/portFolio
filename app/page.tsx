@@ -124,13 +124,23 @@ export default async function Home() {
         <AnimatedSection className="max-w-2xl mx-auto w-full text-center glass rounded-2xl p-12">
           <h2 className="text-3xl font-bold mb-4">함께 일해요</h2>
           <p className="text-muted-foreground mb-8">새로운 프로젝트나 기회에 대해 이야기 나눠요.</p>
-          <a
-            href="mailto:hello@example.com"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-accent text-white font-medium hover:opacity-90 transition-opacity"
-          >
-            <Mail size={18} />
-            연락하기
-          </a>
+          <div className="flex flex-wrap justify-center gap-3">
+            <a
+              href="mailto:gongja124@naver.com"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-accent text-white font-medium hover:opacity-90 transition-opacity"
+            >
+              <Mail size={18} />
+              이메일 보내기
+            </a>
+            <a
+              href="https://www.linkedin.com/in/airhun"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-foreground font-medium hover:bg-foreground/5 transition-colors"
+            >
+              LinkedIn
+            </a>
+          </div>
         </AnimatedSection>
       </section>
     </div>
