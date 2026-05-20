@@ -1,6 +1,8 @@
 import { Client } from "@notionhq/client";
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { activities as staticActivities } from "@/components/common/data/activitiesData";
 import { projects as staticProjects } from "@/components/common/data/projectsData";
+import type { ActivityItem, ActivityType } from "@/types/activity";
 import type { ProjectCardData, ProjectType } from "@/types/project";
 
 function getRichText(page: PageObjectResponse, key: string): string {
@@ -105,5 +107,48 @@ export async function getProjects(): Promise<ProjectCardData[]> {
     return projects.length > 0 ? projects : staticProjects;
   } catch {
     return staticProjects;
+  }
+}
+
+function mapActivityPage(page: PageObjectResponse): ActivityItem {
+  const type = getSelect(page, "Type") as ActivityType;
+
+  return {
+    id: page.id,
+    type: (["경력", "활동", "수상"].includes(type) ? type : "활동") as ActivityType,
+    title: getTitle(page),
+    organization: getRichText(page, "Organization"),
+    period: getRichText(page, "Period"),
+    role: getRichText(page, "Role") || undefined,
+    description: getRichText(page, "Description") || undefined,
+    tags: getMultiSelect(page, "Tags").length > 0 ? getMultiSelect(page, "Tags") : undefined,
+  };
+}
+
+export async function getActivities(): Promise<ActivityItem[]> {
+  const token = process.env.NOTION_TOKEN;
+  const dbId = process.env.NOTION_ACTIVITIES_DB_ID;
+
+  if (!token || !dbId) {
+    return staticActivities;
+  }
+
+  try {
+    const notion = new Client({ auth: token });
+
+    const response = await notion.databases.query({
+      database_id: dbId,
+      sorts: [{ property: "Order", direction: "ascending" }],
+    });
+
+    const pages = response.results.filter(
+      (r): r is PageObjectResponse => r.object === "page" && "properties" in r
+    );
+
+    const items = pages.map(mapActivityPage).filter((a) => a.title);
+
+    return items.length > 0 ? items : staticActivities;
+  } catch {
+    return staticActivities;
   }
 }

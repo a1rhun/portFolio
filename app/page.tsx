@@ -8,12 +8,12 @@ import ParticleBackground from "@/components/common/ParticleBackground";
 import ProjectsSection from "@/components/common/ProjectsSection";
 import SkillsSection from "@/components/common/SkillsSection";
 import WhatIDoCard from "@/components/common/WhatIDoCard";
-import { getProjects } from "@/lib/notion";
+import { getActivities, getProjects } from "@/lib/notion";
 
 export const revalidate = 3600;
 
 export default async function Home() {
-  const projects = await getProjects();
+  const [projects, activities] = await Promise.all([getProjects(), getActivities()]);
 
   return (
     <div className="min-h-screen">
@@ -72,6 +72,27 @@ export default async function Home() {
                   구직 중
                 </span>
               </div>
+
+              {/* 자격증 */}
+              <div>
+                <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-3">
+                  Certifications
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <div className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-accent/5 border border-accent/20">
+                    <div>
+                      <p className="text-sm font-semibold leading-tight">SQLD</p>
+                      <p className="text-xs text-muted-foreground font-mono">2026.04.19</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-accent2/5 border border-accent2/20 border-dashed">
+                    <div>
+                      <p className="text-sm font-semibold leading-tight">정보처리기사</p>
+                      <p className="text-xs text-muted-foreground font-mono">발표 예정</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </AnimatedSection>
 
@@ -96,7 +117,7 @@ export default async function Home() {
       <ProjectsSection initialProjects={projects} />
 
       {/* ── Activities ────────────────────────────────────── */}
-      <ActivitiesSection />
+      <ActivitiesSection initialActivities={activities} />
 
       {/* ── Contact ───────────────────────────────────────── */}
       <section id="contact" className="py-24 px-4 min-h-screen flex items-center relative z-10">

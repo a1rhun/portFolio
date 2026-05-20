@@ -2,10 +2,14 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import type { ActivityCategory, ActivityType } from "@/types/activity";
+import type { ActivityCategory, ActivityItem, ActivityType } from "@/types/activity";
 import ActivityCard from "./ActivityCard";
 import AnimatedSection from "./AnimatedSection";
-import { activities, activityCategories } from "./data/activitiesData";
+import { activityCategories, activities as staticActivities } from "./data/activitiesData";
+
+interface Props {
+  initialActivities?: ActivityItem[];
+}
 
 // ── Styling ────────────────────────────────────────────────────────────────
 const dotBg: Record<ActivityType, string> = {
@@ -51,16 +55,20 @@ function cardClass(side: "full" | "left" | "right"): string {
 }
 
 // ── Component ─────────────────────────────────────────────────────────────
-export default function ActivitiesSection() {
+export default function ActivitiesSection({ initialActivities }: Props) {
+  const activities = initialActivities ?? staticActivities;
   const [active, setActive] = useState<ActivityCategory>("전체");
 
   const handleTabChange = (tab: ActivityCategory) => {
     if (tab !== active) setActive(tab);
   };
 
+  const typeOrder: Record<ActivityType, number> = { 경력: 0, 수상: 1, 활동: 2 };
+  const sorted = [...activities].sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
+
   // Precompute side & isActive for every item (all items always rendered)
   let nonLgCount = 0;
-  const computedItems = activities.map((item) => ({
+  const computedItems = sorted.map((item) => ({
     ...item,
     side:
       item.type === "경력"
@@ -125,7 +133,11 @@ export default function ActivitiesSection() {
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.45, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{
+                    duration: 0.45,
+                    delay: i * 0.1,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                 >
                   {/* Inner: filter dim/highlight (independent of scroll animation) */}
                   <motion.div

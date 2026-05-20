@@ -1,4 +1,4 @@
-export type ActivityCategory = "전체" | "경력" | "활동" | "수상";
+export type ActivityCategory = "전체" | "경력" | "수상" | "활동";
 export type ActivityType = Exclude<ActivityCategory, "전체">;
 
 export interface ActivityProject {
