@@ -1,6 +1,6 @@
 import type { ActivityCategory, ActivityItem } from "@/types/activity";
 
-export const activityCategories: ActivityCategory[] = ["전체", "경력", "활동", "수상"];
+export const activityCategories: ActivityCategory[] = ["전체", "경력", "수상", "활동"];
 
 export const activities: ActivityItem[] = [
   {
