@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { ActivityCategory, ActivityItem, ActivityType } from "@/types/activity";
 import ActivityCard from "./ActivityCard";
 import AnimatedSection from "./AnimatedSection";
@@ -58,9 +58,19 @@ function cardClass(side: "full" | "left" | "right"): string {
 export default function ActivitiesSection({ initialActivities }: Props) {
   const activities = initialActivities ?? staticActivities;
   const [active, setActive] = useState<ActivityCategory>("전체");
+  const sectionRef = useRef<HTMLElement>(null);
 
   const handleTabChange = (tab: ActivityCategory) => {
     if (tab !== active) setActive(tab);
+
+    const scrollTarget =
+      tab === "전체" || tab === "경력"
+        ? sectionRef.current
+        : sectionRef.current?.querySelector<HTMLElement>(`[data-activity-type="${tab}"]`);
+
+    if (!scrollTarget) return;
+    if (window.__lenis) window.__lenis.scrollTo(scrollTarget, { duration: 0.8, offset: -80 });
+    else scrollTarget.scrollIntoView({ behavior: "smooth" });
   };
 
   const typeOrder: Record<ActivityType, number> = { 경력: 0, 수상: 1, 활동: 2 };
@@ -80,7 +90,7 @@ export default function ActivitiesSection({ initialActivities }: Props) {
   }));
 
   return (
-    <section id="activities" className="py-24 px-4 relative z-10">
+    <section ref={sectionRef} id="activities" className="py-24 px-4 relative z-10">
       <div className="max-w-4xl mx-auto w-full">
         {/* ── Header ─────────────────────────────────────────── */}
         <AnimatedSection className="mb-12">
@@ -129,6 +139,7 @@ export default function ActivitiesSection({ initialActivities }: Props) {
                 // Outer: scroll entry animation (fires once)
                 <motion.div
                   key={item.id}
+                  data-activity-type={item.type}
                   className="relative"
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}

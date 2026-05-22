@@ -1,118 +1,119 @@
 /* ── 시맨틱 토큰 ───────────────────────────────────────────── */
 :root {
-  --background: #070C0D;
-  --foreground: #F0F4F4;
-  --card: #111718;
-  --card-foreground: #F0F4F4;
-  --popover: #111718;
-  --popover-foreground: #F0F4F4;
-  --primary: #0DCADC;
-  --primary-foreground: #FFFFFF;
-  --secondary: #1A2223;
-  --secondary-foreground: #F0F4F4;
-  --muted: #1A2223;
-  --muted-foreground: #8FA2A3;
-  --accent: #0DCADC;
-  --accent-foreground: #FFFFFF;
-  --destructive: #EF4343;
-  --destructive-foreground: #FAFAFA;
-  --border: #1E2829;
-  --input: #1E2829;
-  --ring: #0DCADC;
-  --accent2: #10B981;
+  --background: #b8cace;
+  --foreground: #0a1415;
+  --card: #daeaec;
+  --card-foreground: #0a1415;
+  --popover: #daeaec;
+  --popover-foreground: #0a1415;
+  --primary: #0dcadc;
+  --primary-foreground: #ffffff;
+  --secondary: #a8bbbe;
+  --secondary-foreground: #0a1415;
+  --muted: #a8bbbe;
+  --muted-foreground: #1e3c40;
+  --accent: #0dcadc;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4343;
+  --destructive-foreground: #fafafa;
+  --border: #88a4a8;
+  --input: #88a4a8;
+  --ring: #0dcadc;
+  --accent2: #10b981;
   --radius: 0.75rem;
-  --chart-1: #0DCADC;
-  --chart-2: #10B981;
-  --chart-3: #40768C;
-  --chart-4: #E8C468;
-  --chart-5: #F4A362;
+  --chart-1: #0dcadc;
+  --chart-2: #10b981;
+  --chart-3: #40768c;
+  --chart-4: #a07010;
+  --chart-5: #f4a362;
 }
 
 .dark {
-  --background: #070C0D;
-  --foreground: #F0F4F4;
+  --background: #070c0d;
+  --foreground: #f0f4f4;
   --card: #111718;
-  --card-foreground: #F0F4F4;
+  --card-foreground: #f0f4f4;
   --popover: #111718;
-  --popover-foreground: #F0F4F4;
-  --primary: #0DCADC;
-  --primary-foreground: #FFFFFF;
-  --secondary: #1A2223;
-  --secondary-foreground: #F0F4F4;
-  --muted: #1A2223;
-  --muted-foreground: #8FA2A3;
-  --accent: #0DCADC;
-  --accent-foreground: #FFFFFF;
-  --destructive: #7F1D1D;
-  --destructive-foreground: #FAFAFA;
-  --border: #1E2829;
-  --input: #1E2829;
-  --ring: #0DCADC;
-  --accent2: #10B981;
+  --popover-foreground: #f0f4f4;
+  --primary: #0dcadc;
+  --primary-foreground: #ffffff;
+  --secondary: #1a2223;
+  --secondary-foreground: #f0f4f4;
+  --muted: #1a2223;
+  --muted-foreground: #8fa2a3;
+  --accent: #0dcadc;
+  --accent-foreground: #ffffff;
+  --destructive: #7f1d1d;
+  --destructive-foreground: #fafafa;
+  --border: #1e2829;
+  --input: #1e2829;
+  --ring: #0dcadc;
+  --accent2: #10b981;
+  --chart-4: #e8c468;
 }
 
 /* ── 타이포그래피 토큰 ─────────────────────────────────────── */
 :root {
   /* Font size */
-  --text-display: 3.5rem;   /* 56px */
-  --text-h1:      2.5rem;   /* 40px */
-  --text-h2:      2rem;     /* 32px */
-  --text-h3:      1.5rem;   /* 24px */
+  --text-display: 3.5rem; /* 56px */
+  --text-h1: 2.5rem; /* 40px */
+  --text-h2: 2rem; /* 32px */
+  --text-h3: 1.5rem; /* 24px */
   --text-body-lg: 1.125rem; /* 18px */
-  --text-body:    1rem;     /* 16px */
-  --text-label:   0.875rem; /* 14px */
-  --text-caption: 0.75rem;  /* 12px */
+  --text-body: 1rem; /* 16px */
+  --text-label: 0.875rem; /* 14px */
+  --text-caption: 0.75rem; /* 12px */
 
   /* Line height */
   --leading-display: 1.2;
-  --leading-h1:      1.25;
-  --leading-h2:      1.3;
-  --leading-h3:      1.35;
+  --leading-h1: 1.25;
+  --leading-h2: 1.3;
+  --leading-h3: 1.35;
   --leading-body-lg: 1.6;
-  --leading-body:    1.6;
-  --leading-label:   1.5;
+  --leading-body: 1.6;
+  --leading-label: 1.5;
   --leading-caption: 1.5;
 
   /* Font weight */
-  --font-weight-medium:  500;
+  --font-weight-medium: 500;
   --font-weight-regular: 400;
 }
 
 /* ── 디자인 팔레트 ─────────────────────────────────────────── */
 :root {
   /* Blue (Primary) */
-  --blue-50: #D9E1F5;
-  --blue-100: #A4B9E8;
-  --blue-200: #6A93DB;
-  --blue-300: #496FAD;
-  --blue-400: #314C79;
-  --blue-500: #1A2C49;
+  --blue-50: #d9e1f5;
+  --blue-100: #a4b9e8;
+  --blue-200: #6a93db;
+  --blue-300: #496fad;
+  --blue-400: #314c79;
+  --blue-500: #1a2c49;
   --blue-600: #081120;
 
   /* Teal (Secondary) */
-  --teal-50: #BBEEF8;
-  --teal-100: #6ACBDB;
-  --teal-200: #53A2AF;
-  --teal-300: #3E7B85;
-  --teal-400: #29565D;
+  --teal-50: #bbeef8;
+  --teal-100: #6acbdb;
+  --teal-200: #53a2af;
+  --teal-300: #3e7b85;
+  --teal-400: #29565d;
   --teal-500: #163338;
   --teal-600: #051316;
 
   /* Green */
-  --green-50: #C4FBE3;
-  --green-100: #6ADBB2;
-  --green-200: #54B18F;
-  --green-300: #3F886E;
-  --green-400: #2B614E;
-  --green-500: #193D30;
-  --green-600: #081D15;
+  --green-50: #c4fbe3;
+  --green-100: #6adbb2;
+  --green-200: #54b18f;
+  --green-300: #3f886e;
+  --green-400: #2b614e;
+  --green-500: #193d30;
+  --green-600: #081d15;
 
   /* Gray */
-  --gray-50: #E2E6E6;
-  --gray-100: #B9BEBF;
+  --gray-50: #e2e6e6;
+  --gray-100: #b9bebf;
   --gray-200: #939798;
-  --gray-300: #6F7373;
-  --gray-400: #4E5050;
-  --gray-500: #2E2F30;
+  --gray-300: #6f7373;
+  --gray-400: #4e5050;
+  --gray-500: #2e2f30;
   --gray-600: #111112;
 }

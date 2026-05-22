@@ -124,13 +124,14 @@ export default function HeroSection() {
           >
             <GithubIcon size={22} />
           </a>
-          <a
-            href="mailto:hello@example.com"
+          <button
+            type="button"
+            onClick={() => scrollTo("contact")}
             className="p-2 text-muted-foreground hover:text-accent transition-colors"
-            aria-label="Email"
+            aria-label="이메일 보내기"
           >
             <Mail size={22} />
-          </a>
+          </button>
         </motion.div>
 
         <div id="nav-sentinel" aria-hidden="true" className="mt-8" />
