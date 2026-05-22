@@ -1,7 +1,7 @@
-import { Mail } from "lucide-react";
 import Image from "next/image";
 import ActivitiesSection from "@/components/common/ActivitiesSection";
 import AnimatedSection from "@/components/common/AnimatedSection";
+import ContactSection from "@/components/common/ContactSection";
 import { whatIDo } from "@/components/common/data/homeData";
 import HeroSection from "@/components/common/HeroSection";
 import ParticleBackground from "@/components/common/ParticleBackground";
@@ -111,38 +111,16 @@ export default async function Home() {
         </div>
       </section>
 
-      <SkillsSection />
-
       {/* ── Projects ──────────────────────────────────────── */}
       <ProjectsSection initialProjects={projects} />
 
       {/* ── Activities ────────────────────────────────────── */}
       <ActivitiesSection initialActivities={activities} />
 
+      <SkillsSection />
+
       {/* ── Contact ───────────────────────────────────────── */}
-      <section id="contact" className="py-24 px-4 min-h-screen flex items-center relative z-10">
-        <AnimatedSection className="max-w-2xl mx-auto w-full text-center glass rounded-2xl p-12">
-          <h2 className="text-3xl font-bold mb-4">함께 일해요</h2>
-          <p className="text-muted-foreground mb-8">새로운 프로젝트나 기회에 대해 이야기 나눠요.</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <a
-              href="mailto:gongja124@naver.com"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-accent text-white font-medium hover:opacity-90 transition-opacity"
-            >
-              <Mail size={18} />
-              이메일 보내기
-            </a>
-            <a
-              href="https://www.linkedin.com/in/airhun"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-foreground font-medium hover:bg-foreground/5 transition-colors"
-            >
-              LinkedIn
-            </a>
-          </div>
-        </AnimatedSection>
-      </section>
+      <ContactSection />
     </div>
   );
 }

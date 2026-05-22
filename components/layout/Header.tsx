@@ -8,9 +8,9 @@ import { useIsTouchDevice } from "@/lib/hooks/useIsTouchDevice";
 
 const navLinks = [
   { id: "about", label: "소개" },
-  { id: "skills", label: "기술" },
   { id: "projects", label: "프로젝트" },
   { id: "activities", label: "경력" },
+  { id: "skills", label: "기술" },
   { id: "contact", label: "연락" },
 ];
 
@@ -40,9 +40,9 @@ const buildMobileGlassStyle = (mobile: boolean): React.CSSProperties => ({
 });
 
 const activePillStyle: React.CSSProperties = {
-  background: "rgba(255,255,255,0.18)",
-  border: "1px solid rgba(255,255,255,0.38)",
-  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 12px rgba(13,202,220,0.2)",
+  background: "rgba(255,255,255,0.42)",
+  border: "1px solid rgba(255,255,255,0.7)",
+  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.8), 0 2px 12px rgba(13,202,220,0.25)",
 };
 
 export default function Header() {
@@ -71,7 +71,7 @@ export default function Header() {
             setActiveSection((prev) => (prev === id ? null : prev));
           }
         },
-        { threshold: 0.15, rootMargin: "0px 0px -60% 0px" }
+        { threshold: 0.03, rootMargin: "0px 0px -60% 0px" }
       );
       obs.observe(el);
       observers.push(obs);
