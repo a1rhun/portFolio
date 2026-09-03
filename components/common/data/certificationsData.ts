@@ -4,10 +4,13 @@ export const certifications: CertificationItem[] = [
   {
     name: "SQLD",
     date: "2026.04.19",
-    attachment: { url: "/certifications/sqld.pdf", type: "pdf" },
+  },
+  {
+    name: "ADsP",
+    date: "2026.08.28",
   },
   {
     name: "정보처리기사",
-    date: "발표 예정",
+    date: "2026.06.12",
   },
 ];
