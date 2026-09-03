@@ -12,25 +12,38 @@ export const typeBadge: Record<ProjectType, string> = {
   수상작: "bg-chart-4/10 text-chart-4 border-chart-4/25",
 };
 
-// simpleicons CDN: https://cdn.simpleicons.org/{slug} or {slug}/{color}
-// 아이콘이 없는 기술은 약어(initials)로 폴백됨
-export const tagIconMap: Record<string, string> = {
-  "Next.js": "https://cdn.simpleicons.org/nextdotjs/ffffff",
-  TypeScript: "https://cdn.simpleicons.org/typescript",
-  JavaScript: "https://cdn.simpleicons.org/javascript",
-  "Tailwind CSS": "https://cdn.simpleicons.org/tailwindcss",
-  React: "https://cdn.simpleicons.org/react",
-  "Vue.js": "https://cdn.simpleicons.org/vuedotjs",
-  Firebase: "https://cdn.simpleicons.org/firebase",
-  Storybook: "https://cdn.simpleicons.org/storybook",
-  Sass: "https://cdn.simpleicons.org/sass",
-  GSAP: "https://cdn.simpleicons.org/greensock",
-  "Framer Motion": "https://cdn.simpleicons.org/framer",
-  MDX: "https://cdn.simpleicons.org/mdx/ffffff",
-  "React Query": "https://cdn.simpleicons.org/reactquery",
-  Zustand: "",
-  Recharts: "",
+// simpleicons CDN: https://cdn.simpleicons.org/{slug} — 태그명에서 슬러그를 자동 유추한다.
+// Notion에서 태그가 추가/변경돼도 코드 수정 없이 대부분 실제 아이콘이 뜨고,
+// 브랜드 슬러그가 이름과 다르거나 매칭되는 아이콘이 없는 경우만 아래 예외로 등록한다.
+const tagSlugOverrides: Record<string, string> = {
+  "Next.js": "nextdotjs",
+  "Vue.js": "vuedotjs",
+  "Node.js": "nodedotjs",
+  "Nuxt.js": "nuxtdotjs",
+  "React Query": "reactquery",
+  "TanStack Query": "reactquery",
+  "TanStack Table": "reacttable",
+  "TanStack Router": "reactrouter",
+  "Express.js": "express",
+  "Framer Motion": "framer",
+  GSAP: "greensock",
+  ".NET": "dotnet",
+  "C++": "cplusplus",
+  "C#": "csharp",
 };
+
+// 기본 색이 검정에 가까워 다크 배경에서 안 보이는 슬러그는 흰색으로 강제한다.
+const forceWhiteSlugs = new Set(["nextdotjs", "mdx", "vercel", "express", "openai", "github"]);
+
+function slugify(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+export function getTagIconUrl(name: string): string {
+  const slug = tagSlugOverrides[name] ?? slugify(name);
+  const color = forceWhiteSlugs.has(slug) ? "/ffffff" : "";
+  return `https://cdn.simpleicons.org/${slug}${color}`;
+}
 
 export const categories: ProjectCategory[] = ["전체", "개인", "팀", "수상작"];
 
