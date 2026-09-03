@@ -48,7 +48,7 @@ export default function ProjectModal({ data, onClose }: ProjectModalProps) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 8 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-lg glass rounded-2xl overflow-hidden flex flex-col max-h-[85vh]"
+          className="relative w-full max-w-lg glass-modal rounded-2xl overflow-hidden flex flex-col max-h-[85vh]"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Color accent bar */}
