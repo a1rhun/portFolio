@@ -1,7 +1,9 @@
 import Image from "next/image";
 import ActivitiesSection from "@/components/common/ActivitiesSection";
 import AnimatedSection from "@/components/common/AnimatedSection";
+import CertificationsSection from "@/components/common/CertificationsSection";
 import ContactSection from "@/components/common/ContactSection";
+import { certifications } from "@/components/common/data/certificationsData";
 import { whatIDo } from "@/components/common/data/homeData";
 import HeroSection from "@/components/common/HeroSection";
 import ParticleBackground from "@/components/common/ParticleBackground";
@@ -74,25 +76,7 @@ export default async function Home() {
               </div>
 
               {/* 자격증 */}
-              <div>
-                <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-3">
-                  Certifications
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <div className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-accent/5 border border-accent/20">
-                    <div>
-                      <p className="text-sm font-semibold leading-tight">SQLD</p>
-                      <p className="text-xs text-muted-foreground font-mono">2026.04.19</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-accent2/5 border border-accent2/20 border-dashed">
-                    <div>
-                      <p className="text-sm font-semibold leading-tight">정보처리기사</p>
-                      <p className="text-xs text-muted-foreground font-mono">발표 예정</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <CertificationsSection items={certifications} />
             </div>
           </AnimatedSection>
 

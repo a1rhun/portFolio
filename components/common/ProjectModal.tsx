@@ -39,7 +39,7 @@ export default function ProjectModal({ data, onClose }: ProjectModalProps) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
         onClick={onClose}
       >
         {/* Modal panel */}
@@ -112,8 +112,11 @@ export default function ProjectModal({ data, onClose }: ProjectModalProps) {
                 </p>
                 <ul className="flex flex-col gap-2.5">
                   {data.points.map((point, i) => (
-                    // biome-ignore lint/suspicious/noArrayIndexKey: points는 순서 고정 목록
-                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <li
+                      // biome-ignore lint/suspicious/noArrayIndexKey: points는 순서 고정 목록
+                      key={i}
+                      className="flex items-start gap-2 text-sm text-muted-foreground"
+                    >
                       <span className="text-accent mt-0.5 shrink-0 font-bold">›</span>
                       <span>{point}</span>
                     </li>
