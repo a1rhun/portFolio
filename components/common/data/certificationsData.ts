@@ -8,6 +8,7 @@ export const certifications: CertificationItem[] = [
   {
     name: "ADsP",
     date: "2026.08.28",
+
   },
   {
     name: "정보처리기사",
