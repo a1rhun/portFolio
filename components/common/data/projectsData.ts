@@ -18,6 +18,7 @@ export const typeBadge: Record<ProjectType, string> = {
 const tagSlugOverrides: Record<string, string> = {
   "Next.js": "nextdotjs",
   "Vue.js": "vuedotjs",
+  "Vue 3": "vuedotjs",
   "Node.js": "nodedotjs",
   "Nuxt.js": "nuxtdotjs",
   "React Query": "reactquery",
@@ -30,6 +31,8 @@ const tagSlugOverrides: Record<string, string> = {
   ".NET": "dotnet",
   "C++": "cplusplus",
   "C#": "csharp",
+  Java: "openjdk",
+  SCSS: "sass",
 };
 
 // 기본 색이 검정에 가까워 다크 배경에서 안 보이는 슬러그는 흰색으로 강제한다.
@@ -46,6 +49,11 @@ const noIconTags = new Set([
   "pgvector",
   "AWS",
   "OpenAI",
+  "Clean Architecture",
+  "MVVM",
+  "Frontend",
+  "Web",
+  "App",
 ]);
 
 function slugify(name: string): string {
