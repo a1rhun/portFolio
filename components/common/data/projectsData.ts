@@ -35,11 +35,25 @@ const tagSlugOverrides: Record<string, string> = {
 // 기본 색이 검정에 가까워 다크 배경에서 안 보이는 슬러그는 흰색으로 강제한다.
 const forceWhiteSlugs = new Set(["nextdotjs", "mdx", "vercel", "express", "openai", "github"]);
 
+// Simple Icons에 매칭되는 로고가 없는 것으로 확인된 태그. 요청 자체를 생략해
+// 깨진 이미지가 잠깐 노출됐다가 이니셜로 바뀌는 깜빡임을 없앤다.
+const noIconTags = new Set([
+  "Zustand",
+  "Recharts",
+  "MSW",
+  "RAG",
+  "Serwist",
+  "pgvector",
+  "AWS",
+  "OpenAI",
+]);
+
 function slugify(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]/g, "");
 }
 
-export function getTagIconUrl(name: string): string {
+export function getTagIconUrl(name: string): string | null {
+  if (noIconTags.has(name)) return null;
   const slug = tagSlugOverrides[name] ?? slugify(name);
   const color = forceWhiteSlugs.has(slug) ? "/ffffff" : "";
   return `https://cdn.simpleicons.org/${slug}${color}`;
