@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { tagIconMap } from "./data/projectsData";
+import { getTagIconUrl } from "./data/projectsData";
 
 interface TagIconProps {
   name: string;
@@ -9,7 +9,7 @@ interface TagIconProps {
 }
 
 export default function TagIcon({ name, size = "sm" }: TagIconProps) {
-  const iconUrl = tagIconMap[name];
+  const iconUrl = getTagIconUrl(name);
   const [errored, setErrored] = useState(false);
 
   const initials = name
